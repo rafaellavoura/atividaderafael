@@ -14,3 +14,30 @@ services:
       FLOCI_ENDPOINT: http://floci:4566
     depends_on:
       - floci
+
+  postgres:
+    image: postgres:18
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: tot
+      POSTGRES_PASSWORD: tot
+      POSTGRES_DB: vddb
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:26.2.3
+    ports:
+      - "8978:8978"
+    environment:
+      CB_SERVER_NAME: ToT
+      CB_ADMIN_NAME: cbadmin
+      CB_ADMIN_PASSWORD: Tot12345
+    volumes:
+      - ./infra/cloudbeaver/data-sources.json:/opt/cloudbeaver/conf/initial-data-sources.conf:ro
+      - cloudbeaver:/opt/cloudbeaver/workspace
+
+volumes:
+  pgdata:
+  cloudbeaver:
