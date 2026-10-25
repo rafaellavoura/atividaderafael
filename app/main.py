@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from app.fila import enviar_mensagem_livro
 
-app = FastAPI(title="API de Livros", version="0.1.0")
+app = FastAPI(title="API/Livros", version="0.1.0")
 
 class Livro(BaseModel):
     id: str
