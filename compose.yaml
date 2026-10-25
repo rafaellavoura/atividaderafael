@@ -20,9 +20,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: tot
-      POSTGRES_PASSWORD: tot
-      POSTGRES_DB: vddb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - pgdata:/var/lib/postgresql
 
@@ -32,8 +32,8 @@ services:
       - "8978:8978"
     environment:
       CB_SERVER_NAME: ToT
-      CB_ADMIN_NAME: cbadmin
-      CB_ADMIN_PASSWORD: Tot12345
+      CB_ADMIN_NAME: ${CB_ADMIN_NAME}
+      CB_ADMIN_PASSWORD: ${CB_ADMIN_PASSWORD}
     volumes:
       - ./infra/cloudbeaver/data-sources.json:/opt/cloudbeaver/conf/initial-data-sources.conf:ro
       - cloudbeaver:/opt/cloudbeaver/workspace
