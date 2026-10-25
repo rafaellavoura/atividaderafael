@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from app.fila import enviar_mensagem_livro
 
 app = FastAPI(title="API/Livros", version="0.1.0")
-
 class Livro(BaseModel):
     id: str
     titulo: str
