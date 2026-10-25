@@ -29,3 +29,11 @@ def engine():
 def session(engine):
     with Session(engine) as session:
         yield session
+
+
+@pytest.fixture(autouse=True)
+def ambiente(monkeypatch):
+    monkeypatch.setenv("DATABASE_URL", "sqlite://")
+    monkeypatch.setenv("AWS_ACCESS_KEY_ID", "test")
+    monkeypatch.setenv("AWS_SECRET_ACCESS_KEY", "test")
+    monkeypatch.setenv("AWS_DEFAULT_REGION", "us-east-1")
