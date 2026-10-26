@@ -36,7 +36,8 @@
    ```bash
    uv add sqlmodel "psycopg[binary]"
    uv run python 05-banco.py
-Exercicio 06 - Pipeline de imagens
+
+# Exercicio 06 - Pipeline de imagens
 
 A API recebe um PNG, guarda no S3, registra no banco e avisa a fila. O worker processa com OpenCV, guarda o resultado e avisa que terminou.
 

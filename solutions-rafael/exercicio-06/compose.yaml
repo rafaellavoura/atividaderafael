@@ -5,6 +5,11 @@ services:
       - "4566:4566"
     volumes:
       - ./infra/floci/ready.d:/etc/floci/init/ready.d:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
 
   floci-ui:
     image: floci/floci-ui:0.7.0
@@ -45,7 +50,7 @@ services:
 
   api:
     build: .
-    command: uvicorn pipeline.api:app --host 0.0.0.0 --port 8000
+    command: uv run uvicorn pipeline.api:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
     environment: &pipeline-env
@@ -63,7 +68,7 @@ services:
 
   worker:
     build: .
-    command: python -m pipeline.worker
+    command: uv run python -m pipeline.worker
     environment: *pipeline-env
     depends_on:
       postgres:
