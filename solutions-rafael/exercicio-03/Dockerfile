@@ -4,5 +4,7 @@ WORKDIR /srv
 ENV UV_COMPILE_BYTECODE=1 PYTHONUNBUFFERED=1
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
-COPY pipeline pipeline
+COPY app app
 ENV PATH="/srv/.venv/bin:$PATH"
+
+CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
